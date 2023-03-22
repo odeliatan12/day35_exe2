@@ -1,0 +1,47 @@
+<h4>Funds Transfer</h4>
+<form [formGroup]="form">
+    <table>
+        <tr>
+            <td>From account:</td>
+            <td>
+                <select formControlName="fromAccount">
+                    <option *ngFor="let a of accounts" [value]="a.account_id">
+                        {{ a.name }} ( {{ a.account_id }} )
+                    </option>
+                </select>
+                <div *ngIf="form.get('fromAccount')?.hasError('required')">
+                    Please choose an account
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>To account:</td>
+            <td>
+                <select formControlName="toAccount">
+                    <option *ngFor="let a of accounts" [value]="a.account_id">
+                        {{ a.name }} ( {{ a.account_id }} )
+                    </option>
+                </select>
+                <div *ngIf="form.get('toAccount')?.hasError('required')">
+                    Please choose an account
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Amount: </td>
+            <td>
+                <input type="number" formControlName="amount">
+            </td>
+            <div *ngIf="form.get('amount')?.hasError('min')">
+                Please enter an amount more than 10
+            </div>
+        </tr>
+        <tr>
+            <td>Comments: </td>
+            <td>
+                <textarea name="" cols="30" rows="10" formControlName="comments"></textarea>
+            </td>
+        </tr>
+        <ng-content></ng-content>
+    </table>
+</form>
